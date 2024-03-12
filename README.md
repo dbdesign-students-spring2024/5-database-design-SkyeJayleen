@@ -51,7 +51,7 @@ I tried thinking of ***course_name*** and ***course_section*** as a composite ke
     * **assignment_id**
         * assignment_type
         * assignment_topic
-        * due_date
+        * *due_date*
         * *grade*
         * relevant_readings
     * **student_id**
@@ -59,12 +59,13 @@ I tried thinking of ***course_name*** and ***course_section*** as a composite ke
         * student_email
 
 
-The fields marked in *italic* introduces some challenges to the process:
-1. *grade* is specific to the combination of the student and the assignment. In order to make it comply to the 2NF, it would require a separate table with a composite key combining ***assignment_id*** and ***student_id*** as only then *grade* would be specific to the composite key.
+The fields marked in *italic* introduces some challenges to the process. I was also beginning to think about the Third Normal Form at this point, which does not allow a non-key field to describe another non-key field. The challenges were:
 
-I was also beginning to think about the Third Normal Form at this point, which does not allow a non-key field to describe another non-key field. 
+1. *professor_email* has an awkward placement as it is only relevant to *professor* rather than the composite key of ***course_name + course_section***. This can be fixed by creating another table dedicated to the information about each professors.
 
-2. *professor_email* has an awkward placement as it is only relevant to *professor* rather than the composite key of ***course_name + course_section***. This can be fixed by creating another table dedicated to the information about each professors.
+2. *due_date* is specific to a whopping four things: the professor, course name, course section, and the assignment, so it will require a separate table as well.
+
+3. *grade* is specific to the combination of the student and the assignment. In order to make it comply to the 2NF, it would require a separate table with a composite key combining ***assignment_id*** and ***student_id*** as only then *grade* would be specific to the composite key.
 
 From this exploration, I started building rudimentary skeletons for tables, the primary key marked with an asterik(*):
 * Table 1(*students*) dedicated to student information
@@ -85,11 +86,17 @@ From this exploration, I started building rudimentary skeletons for tables, the 
 | :- | - | - | - | - | - | - | - | - |
 | ... | ... | ... | ... | ... | ... | ... | ... | ... |
 
-* Table 4(*student_grade*) final table dedicated to student-assignment specific grade information.
+* Table 4(*student_grade*) dedicated to student-assignment specific grade information.
 
 | student_id* | assignment_id* | grade |
 | :- | - | - |
 | ... | ... | ... |
+
+* Table 5(*duedates*) dedicated to the specific due dates of assignments in different sections / professors in the same course.
+
+| professor_email* | course_name* | course_section* | assignment_id | due_date |
+| :- | - | - | - | - |
+| ... | ... | ... | ... | ... |
 
 These are closer, but Table 3 does not satisfy the 2NF as some fields do not facts about the primary composite key. So I split that table into two:
 
@@ -104,3 +111,5 @@ These are closer, but Table 3 does not satisfy the 2NF as some fields do not fac
 | assignemnt_id* | assignemnt_type | assignment_topic | due_date | relevant_readings | 
 | :- | - | - | - | - |
 | ... | ... | ... | ... | ... |
+
+I went through all of the individual tables 1, 2, 3.1, 3.2 and 4 to double-check that they all met the requirements to satisfy 2NF and 3NF.
