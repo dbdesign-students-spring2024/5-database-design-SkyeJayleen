@@ -4,15 +4,15 @@
 
 ### Adding Relevant Fields
 
-First, I added five additional fields, *student_name*, *student_id*, *course_name*, *course_section and *assignment_type* based on my assumptions that these fields will be relevant and helpful when examining the data.
+First, I added five additional fields, *student_name*, *student_id*, *course_name*, *course_section* and *assignment_type* based on my assumptions that these fields will be relevant and helpful when examining the data.
 
 | assignment_id | student_id | student_name | student_email | course_name | course_section | due_date | professor | assignment_type | assignment_topic | classroom | grade | relevant_reading | professor_email |
 | :- | - | - | - | - | - | - | - | - | - | - | - | - | - |
-| 1 | 1 | Pauline Vi | pauline@gmail.com | Database Design | A | 23.02.21 | Melvin | Data normalization | Quiz 1 | WWH 101 | 80 | Deumlich Chapter 3 | l.melvin@foo.edu |
-| 2 | 7 | Anemone Kaiden | anekai@gmail.edu | Computer Programming | R | 18.11.21 | Logston | Single table queries | Midterm | 60FA 314  | 25 | Dümmlers Chapter 11 | e.logston@foo.edu |
-| 1 | 4 | Earline Solomon | esol@hotmail.com | Database Design | C | 23.02.21 | Melvin | Data normalization | Quiz 1 | WWH 101 | 75 | Deumlich Chapter 3 | l.melvin@foo.edu |
-| 5 | 2 | Kylan Ora | kyora@email.com | Computer Programming | A | 05.05.21 | Logston | Python and pandas | Quiz 2 | 60FA 314 | 92 | Dümmlers Chapter 14 | e.logston@foo.edu |
-| 4 | 2 | Gwendolyn Tim | gwen@website.com | Excel Spreadsheets | B | 04.07.21 | Nevarez | Spreadsheet aggregate functions | Workshop | WWH 201 | 65 | Zehnder Page 87 | i.nevarez@foo.edu |
+| 1 | 1 | Pauline Vi | pauline@gmail.com | Database Design | 004 | 23.02.21 | Melvin | Data normalization | Quiz 1 | WWH 101 | 80 | Deumlich Chapter 3 | l.melvin@foo.edu |
+| 2 | 7 | Anemone Kaiden | anekai@gmail.edu | Computer Programming | 007 | 18.11.21 | Logston | Single table queries | Midterm | 60FA 314  | 25 | Dümmlers Chapter 11 | e.logston@foo.edu |
+| 1 | 4 | Earline Solomon | esol@hotmail.com | Database Design | 002 | 23.02.21 | Melvin | Data normalization | Quiz 1 | WWH 101 | 75 | Deumlich Chapter 3 | l.melvin@foo.edu |
+| 5 | 2 | Kylan Ora | kyora@email.com | Computer Programming | 004 | 05.05.21 | Logston | Python and pandas | Quiz 2 | 60FA 314 | 92 | Dümmlers Chapter 14 | e.logston@foo.edu |
+| 4 | 2 | Gwendolyn Tim | gwen@website.com | Excel Spreadsheets | 005 | 04.07.21 | Nevarez | Spreadsheet aggregate functions | Workshop | WWH 201 | 65 | Zehnder Page 87 | i.nevarez@foo.edu |
 | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... |
 
 Then, I moved on to normalizing the table.
