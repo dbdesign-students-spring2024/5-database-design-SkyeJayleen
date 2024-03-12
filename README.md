@@ -80,23 +80,23 @@ From this exploration, I started building rudimentary skeletons for tables, the 
 | :- | - |
 | ... | ... |
 
-* Table 3(*course_assignments*) dedicated to the course_name-section specific assignment information
+* Table 3(*course_assignments*) dedicated to the course_name-section specific assignment information:
 
-| course_name* | course_section* | professor | assignment_id | classroom | assignment_type | assignment_topic | due_date | relevant_readings |
-| :- | - | - | - | - | - | - | - | - |
-| ... | ... | ... | ... | ... | ... | ... | ... | ... |
+| course_name* | course_section* | professor | assignment_id | classroom | assignment_type | assignment_topic | relevant_readings |
+| :- | - | - | - | - | - | - | - |
+| ... | ... | ... | ... | ... | ... | ... | ... |
 
-* Table 4(*student_grade*) dedicated to student-assignment specific grade information.
+* Table 4(*student_grade*) dedicated to student-assignment specific grade information:
 
 | student_id* | assignment_id* | grade |
 | :- | - | - |
 | ... | ... | ... |
 
-* Table 5(*duedates*) dedicated to the specific due dates of assignments in different sections / professors in the same course.
+* Table 5(*duedates*) dedicated to the specific due dates of assignments in specific sections of courses():
 
-| professor_email* | course_name* | course_section* | assignment_id | due_date |
-| :- | - | - | - | - |
-| ... | ... | ... | ... | ... |
+| course_name* | course_section* | assignment_id* | due_date |
+| :- | - | - | - |
+| ... | ... | ... | ... |
 
 These are closer, but Table 3 does not satisfy the 2NF as some fields do not facts about the primary composite key. So I split that table into two:
 
@@ -108,8 +108,8 @@ These are closer, but Table 3 does not satisfy the 2NF as some fields do not fac
 
 * And Table 3.2(*assignments*) that describes the specific assignment:
 
-| assignemnt_id* | assignemnt_type | assignment_topic | due_date | relevant_readings | 
+| assignemnt_id* | assignemnt_type | assignment_topic | relevant_readings | 
 | :- | - | - | - | - |
 | ... | ... | ... | ... | ... |
 
-I went through all of the individual tables 1, 2, 3.1, 3.2 and 4 to double-check that they all met the requirements to satisfy 2NF and 3NF.
+I went through all of the individual tables to double-check that they all met the requirements to satisfy 2NF and 3NF.
