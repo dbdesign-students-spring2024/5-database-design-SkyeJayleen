@@ -1,6 +1,21 @@
 # Data Normalization and Entity-Relationship Diagramming
 
-## Converting to Fourth Normal Form
+## The Original Data
+
+| assignment_id | student_id | due_date | professor | assignment_topic                | classroom | grade | relevant_reading    | professor_email   |
+| :------------ | :--------- | :------- | :-------- | :------------------------------ | :-------- | :---- | :------------------ | :---------------- |
+| 1             | 1          | 23.02.21 | Melvin    | Data normalization              | WWH 101   | 80    | Deumlich Chapter 3  | l.melvin@foo.edu  |
+| 2             | 7          | 18.11.21 | Logston   | Single table queries            | 60FA 314  | 25    | Dümmlers Chapter 11 | e.logston@foo.edu |
+| 1             | 4          | 23.02.21 | Melvin    | Data normalization              | WWH 101   | 75    | Deumlich Chapter 3  | l.melvin@foo.edu  |
+| 5             | 2          | 05.05.21 | Logston   | Python and pandas               | 60FA 314  | 92    | Dümmlers Chapter 14 | e.logston@foo.edu |
+| 4             | 2          | 04.07.21 | Nevarez   | Spreadsheet aggregate functions | WWH 201   | 65    | Zehnder Page 87     | i.nevarez@foo.edu |
+| ...           | ...        | ...      | ...       | ...                             | ...       | ...   | ...                 | ...               |
+
+To meet the Fourth Normal Form, the data must comply with the First, Second and Third Normal Form. Although the original table is in a fixed schema and meets teh First Normal Form, it does not have an indicated primary key, which makes it not meet the Second Normal Form, subsequently not meeting the requirements for the Third and the Fourth Normal Form.
+
+Even if we arbitrarily selected one(or a few) primary key(s), all of the fields have complicated, disorganized dependencies of one another. For example, *due_date* may be related to *assignment_id*, it has nothing to do with *studnet_id*. This needs to be fixed to meet the Second and Third Normal Forms, after which we can finally start talking about the Fourth Normal form.
+
+## Let's start tweaking!
 
 ### Adding Relevant Fields
 
@@ -100,7 +115,7 @@ From this exploration, I started building rudimentary skeletons for tables, the 
 
 These are closer, but Table 3 does not satisfy the 2NF as some fields do not facts about the primary composite key. So I split that table into two:
 
-* Table 3.1 consisting of just the specific course name-section:
+* Table 3.1 consisting of just the specific sections of courses:
 
 | course_name* | course_section* | professor | classroom | assignment_id | 
 | :- | - | - | - | - |
@@ -122,26 +137,52 @@ I identified the fields in each table that can have two or more multivalued fact
 
 **Table 1**: One student ID can only be attribute to a single student, who will only have one name(presumably) and one email(that is used in the school, at least). All good.
 
-**Table 2**: Table 2 only has two rows, and is similar with Table 1 that each professor has only one email. All good.
+**Table 2**: Table 2 only has two columns. All good.
 
 **Table 3.1**: There is only one set professor for a specific combination of course + section. This is also true for classrooms. Multiple assignments can(and likely will) be assigned to a specific course section, but that is only one multivalued fact. Therefore, Table 3.1 also fits the 4NF. All good.
 
-**Table 3.2**: 
+**Table 3.2**: Assignment ID can only refer to a single assignment in the form of a certain type and topic. There may be multiple relevant readings given for a single assignment, but that is one multivalued fact. All good.
 
+**Table 4**: Only a single grade will be given to a student regarding a specific assignment. All good.
 
+**Table 5**: A single specified assignment will have only one due date. All good.
 
-Both assignment type(ex: "Quiz 1" in two different courses) and topic(ex: "Quiz 1" and "Workshop 1" being about the same topic) (and arguably relevant readings) can contain multiple values: we can split the table again into three different tables Table 3.2.1, 3.2.2. and 3.2.3 respectively about the assignment type, topic and relevant readings.
+So let's put everything together:
 
-| assignemnt_id* | assignemnt_type |
+### 4NF Compliant Data
+
+Table 1:
+
+| student_id* | student_name | student_email |
+| :- | - | - |
+| ... | ... | ... |
+
+Table 2:
+
+| professor_email* | professor |
 | :- | - |
 | ... | ... |
 
-| assignemnt_id* | assignemnt_topic |
-| :- | - |
-| ... | ... |
+Table 3.1:
 
-| assignemnt_id* | relevant_readings |
-| :- | - |
-| ... | ... |
+| course_name* | course_section* | professor | classroom | assignment_id | 
+| :- | - | - | - | - |
+| ... | ... | ... | ... | ... |
 
-**Table 4**: Grade may contain multiple same values, 
+Table 3.2:
+
+| assignemnt_id* | assignemnt_type | assignment_topic | relevant_readings | 
+| :- | - | - | - |
+| ... | ... | ... | ... |
+
+Table 4:
+
+| student_id* | assignment_id* | grade |
+| :- | - | - |
+| ... | ... | ... |
+
+Table 5:
+
+| course_name* | course_section* | assignment_id* | due_date |
+| :- | - | - | - |
+| ... | ... | ... | ... |
