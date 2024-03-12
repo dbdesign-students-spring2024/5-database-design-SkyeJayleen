@@ -219,3 +219,4 @@ Table 5:
 
 ## The Entity-Relationship Diagram
 
+![logo SVG](images/er_diagram.svg)
