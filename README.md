@@ -149,40 +149,73 @@ I identified the fields in each table that can have two or more multivalued fact
 
 So let's put everything together:
 
-### 4NF Compliant Data
+## 4NF Compliant Data
 
 Table 1:
 
 | student_id* | student_name | student_email |
 | :- | - | - |
+| 1 | Pauline Vi | pauline@gmail.com |
+| 7 | Anemone Kaiden | anekai@gmail.edu |
+| 4 | Earline Solomon | esol@hotmail.com |
+| 2 | Kylan Ora | kyora@email.com |
+| 2 | Gwendolyn Tim | gwen@website.com |
 | ... | ... | ... |
 
 Table 2:
 
 | professor_email* | professor |
 | :- | - |
+| l.melvin@foo.edu | Melvin |
+| e.logston@foo.edu | Logston |
+| l.melvin@foo.edu | Melvin |
+| e.logston@foo.edu | Logston |
+| i.nevarez@foo.edu | Nevarez |
 | ... | ... |
 
 Table 3.1:
 
 | course_name* | course_section* | professor | classroom | assignment_id | 
 | :- | - | - | - | - |
+| Database Design | 004 | Melvin | WWH 101 | 1 |
+| Computer Programming | 007 | Logston | 60FA 314 | 2 |
+| Database Design | 002 | Melvin | WWH 101 | 1 |
+| Computer Programming | 004 | Logston | 60FA 314 | 5 |
+| Excel Spreadsheets | 005 | Nevarez | WWH 201 | 4 |
 | ... | ... | ... | ... | ... |
 
 Table 3.2:
 
 | assignemnt_id* | assignemnt_type | assignment_topic | relevant_readings | 
 | :- | - | - | - |
+| 1 | Quiz 1 | Data normalization | Deumlich Chapter 3 |
+| 2 | Midterm | Single table queries | Dümmlers Chapter 11 |
+| 1 | Quiz 1 | Data normalization | Deumlich Chapter 3 |
+| 5 | Quiz 2 | Python and Pandas | Dümmlers Chapter 14 |
+| 4 | Workshop | Spreadsheet aggregate functions | Zehnder Page 87 |
 | ... | ... | ... | ... |
 
 Table 4:
 
 | student_id* | assignment_id* | grade |
 | :- | - | - |
-| ... | ... | ... |
+| 1 | 1 | 80 |
+| 7 | 2 | 25 |
+| 4 | 1 | 75 |
+| 2 | 5 | 92 |
+| 2 | 4 | 65 |
+| ... | ... | ... | 
 
 Table 5:
 
 | course_name* | course_section* | assignment_id* | due_date |
 | :- | - | - | - |
+| Database Design | 004 | 1 | 23.02.21 |
+| Computer Programming | 007 | 2 | 18.11.21 |
+| Database Design | 002 | 1 | 23.02.21 |
+| Computer Programming | 004 | 5 | 05.05.21 |
+| Excel Spreadsheets | 005 | 4 | 04.07.21 |
 | ... | ... | ... | ... |
+
+## The Entity-Relationship Diagram
+
